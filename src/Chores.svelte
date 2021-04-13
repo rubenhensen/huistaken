@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Fa from 'svelte-fa'
 	import { faAngleDoubleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
-	import { matching } from './stores.js';
+	import { matching } from './stores';
 </script>
 
 

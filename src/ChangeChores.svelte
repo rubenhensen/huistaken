@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { chores } from './stores.js';
+	import { chores } from './stores';
 </script>
 
 <form>

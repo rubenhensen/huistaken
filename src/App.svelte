@@ -3,6 +3,7 @@
 	import NewChores from './NewChores.svelte';
 	import ChangeNames from './ChangeNames.svelte';
 	import ChangeChores from './ChangeChores.svelte';
+
 	let page = 'Chores';
 	function changePage(newPage: string) {
 		page = newPage;
@@ -63,11 +64,4 @@
 </main>
 
 <style>
-
-	/* main {
-		text-align: center;
-		padding: 1em;
-		margin: 0 auto;
-	} */
-
 </style>
