@@ -1,10 +1,14 @@
-// import type Gender from './genderDefinition'
-import type {Gender} from './genderDefinition'
+enum Gender {
+    Male,
+    Female
+}
+
 
 interface Person {
+    id: number,
     name: string,
     gender: Gender
 }
 
-// export default Person;
-export type {Person};
+export type { Person };
+export { Gender };

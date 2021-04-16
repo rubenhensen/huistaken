@@ -1,39 +1,42 @@
-import { writable } from 'svelte-local-storage-store'
-import type {Person} from './personDefinition'
+// import { writable } from 'svelte-local-storage-store'
+import { writable } from 'svelte/store'
+import type { Person } from './personDefinition'
+import { Gender } from './personDefinition'
+import type { Chore } from './choreDefinition'
 
-export const names = writable<Person[]>('names', [
-    { name: "Ruben", gender: "malet" },
-    { name: "Anouk", gender: "female" },
-    { name: "Mathijs", gender: "male" },
-    { name: "Kim", gender: "female" },
-    { name: "Thomas", gender: "male" },
-    { name: "Anna", gender: "female" },
-    { name: "Jette", gender: "female" },
-    { name: "Manon", gender: "female" },
-    { name: "Thomas2", gender: "male" },
-    { name: "Melki", gender: "male" },])
+export const names = writable<Person[]>([
+    { id: 0, name: "Ruben", gender: Gender.Male},
+    { id: 1, name: "Anouk", gender: Gender.Female },
+    { id: 2, name: "Mathijs", gender: Gender.Male },
+    { id: 3, name: "Kim", gender: Gender.Female },
+    { id: 4, name: "Thomas", gender: Gender.Male },
+    { id: 5, name: "Anna", gender: Gender.Female },
+    { id: 6, name: "Jette", gender: Gender.Female },
+    { id: 7, name: "Manon", gender: Gender.Female },
+    { id: 8, name: "Thomas2", gender: Gender.Male },
+    { id: 9, name: "Melki", gender: Gender.Male },])
 
-export const chores = writable('chores', [
-    "Keuken",
-    "Keuken",
-    "Woonkamer",
-    "Woonkamer",
-    "Gang",
-    "Apparaten en washok",
-    "Oud papier en glas",
-    "Oud papier en glas",
-    "WC/Douche jongens",
-    "WC/Douche meisjes"])
+export const chores = writable<Chore[]>([
+    { id: 0, chore: "Keuken"},
+    { id: 1, chore: "Keuken"},
+    { id: 2, chore: "Woonkamer"},
+    { id: 3, chore: "Woonkamer"},
+    { id: 4, chore: "Gang"},
+    { id: 5, chore: "Apparaten en washok"},
+    { id: 6, chore: "Oud papier en glas"},
+    { id: 7, chore: "Oud papier en glas"},
+    { id: 8, chore: "WC/Douche jongens"},
+    { id: 9, chore: "WC/Douche meisjes"}])
 
-export const matching = writable('matching', [
-    { name: "Ruben", chore: "Keuken", completed: false },
-    { name: "Anouk", chore: "Keuken", completed: false },
-    { name: "Mathijs", chore: "Woonkamer", completed: false },
-    { name: "Kim", chore: "Woonkamer", completed: false },
-    { name: "Thomas", chore: "Gang", completed: false },
-    { name: "Anna", chore: "Apparaten en washok", completed: false },
-    { name: "Jette", chore: "Oud papier en glas", completed: false },
-    { name: "Manon", chore: "Oud papier en glas", completed: false },
-    { name: "Thomas2", chore: "WC/Douche jongens", completed: false },
-    { name: "Melki", chore: "WC/Douche meisjes", completed: false },])
+export const currentMatching = writable([
+    { personId: "Ruben", choreId: "Keuken", completed: true },
+    { personId: "Anouk", choreId: "Keuken", completed: true },
+    { personId: "Mathijs", choreId: "Woonkamer", completed: true },
+    { personId: "Kim", choreId: "Woonkamer", completed: true },
+    { personId: "Thomas", choreId: "Gang", completed: true },
+    { personId: "Anna", choreId: "Apparaten en washok", completed: true },
+    { personId: "Jette", choreId: "Oud papier en glas", completed: true },
+    { personId: "Manon", choreId: "Oud papier en glas", completed: true },
+    { personId: "Thomas2", choreId: "WC/Douche jongens", completed: true },
+    { personId: "Melki", choreId: "WC/Douche meisjes", completed: true },])
 
