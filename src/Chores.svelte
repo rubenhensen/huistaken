@@ -1,7 +1,5 @@
 <script lang="ts">
-	import Fa from 'svelte-fa'
-	import { faAngleDoubleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
-	import { currentMatching } from './stores';
+	import { currentMatching, chores, names } from './stores';
 </script>
 
 
@@ -14,10 +12,12 @@
       </tr>
     </thead>
     <tbody>
-    {#each $currentMatching as {name, chore} , i}
+    {#each $currentMatching as {personId, choreId} , i}
       <tr>
-        <td>{name}</td>
-        <td>{chore}</td>
+        <td>{typeof $currentMatching}</td>
+        <!-- <td>{personId}</td> -->
+        <!-- <td>{$names.find(x => x.id === personId).name}</td> -->
+        <!-- <td>{$chores.find(x => x.id === choreId).chore}</td> -->
       </tr>
     {/each}
     </tbody>
