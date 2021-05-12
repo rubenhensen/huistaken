@@ -1,5 +1,4 @@
 <script lang="ts">
-	import IconChoice from "./IconChoice.svelte";
 	import { faFemale, faMale } from '@fortawesome/free-solid-svg-icons'
 	import ManWoman from "./ManWoman.svelte";
 	import { names } from "./stores";

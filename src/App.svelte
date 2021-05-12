@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Chores from './Chores.svelte';
-	import NewChores from './NewChores.svelte';
 	import ChangeNames from './ChangeNames.svelte';
 	import ChangeChores from './ChangeChores.svelte';
+	
 
 	let page = 'Chores';
 	function changePage(newPage: string) {
@@ -23,12 +23,6 @@
 			</button>
 
 			<button class="button button-primary" 
-				on:click="{() => changePage("NewChores")}"
-				class:selected="{page === 'NewChores'}">
-				Nieuwe huistaken
-			</button>
-
-			<button class="button button-primary" 
 				on:click="{() => changePage("ChangeNames")}"
 				class:selected="{page === 'ChangeNames'}">
 				Namen veranderen
@@ -43,10 +37,6 @@
 
 			{#if page == "Chores"}
 			<Chores />
-			{/if}
-
-			{#if page == "NewChores"}
-			<NewChores />
 			{/if}
 
 			{#if page == "ChangeNames"}

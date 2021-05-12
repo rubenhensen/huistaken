@@ -38,3 +38,6 @@ export const currentMatching = writable('currentMatching',[
     { personId: 7, choreId: 7, completed: true },
     { personId: 8, choreId: 8, completed: true },
     { personId: 9, choreId: 9, completed: true },])
+
+export const archiveWeeks = writable<string[]>('archiveWeeks', [])
+
