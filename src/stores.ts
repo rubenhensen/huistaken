@@ -2,6 +2,7 @@ import { writable } from 'svelte-local-storage-store'
 import type { Person } from './personDefinition'
 import { Gender } from './personDefinition'
 import type { Chore } from './choreDefinition'
+import type { Matching } from './matchingDefinition'
 
 export const names = writable<Person[]>('names', [
     { id: 0, name: "Ruben", gender: Gender.Male},
@@ -27,7 +28,7 @@ export const chores = writable<Chore[]>('chores', [
     { id: 8, chore: "WC/Douche jongens"},
     { id: 9, chore: "WC/Douche meisjes"}])
 
-export const currentMatching = writable('currentMatching',[
+export const currentMatching = writable<Matching[]>('currentMatching',[
     { personId: 0, choreId: 0, completed: true },
     { personId: 1, choreId: 1, completed: true },
     { personId: 2, choreId: 2, completed: true },
@@ -39,5 +40,5 @@ export const currentMatching = writable('currentMatching',[
     { personId: 8, choreId: 8, completed: true },
     { personId: 9, choreId: 9, completed: true },])
 
-export const archiveWeeks = writable<string[]>('archiveWeeks', [])
+export const archiveWeeks = writable<Matching[][]>('archiveWeeks', [])
 

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { currentMatching, chores, names } from './stores';
+	import { currentMatching, chores, names, archiveWeeks } from './stores';
   import YesNo from "./YesNo.svelte";
-  // import findMatching from 'bipartite-matching';
-  // import { v4 as uuidv4 } from 'uuid';
+  import findMatching from 'randomized-hopcroft-karp';
   function createNewChores() : void {
-    // console.log(uuidv4());
-    localStorage.setItem('myCat', 'Tom');
+    archiveWeeks.update(arr => [...arr, $currentMatching]);
+    
+    console.log($archiveWeeks);
     // findMatching()
   }
 </script>
