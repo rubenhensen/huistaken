@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { currentMatching, chores, names } from './stores';
   import YesNo from "./YesNo.svelte";
-  import findMatching from 'bipartite-matching';
+  // import findMatching from 'bipartite-matching';
   // import { v4 as uuidv4 } from 'uuid';
   function createNewChores() : void {
     // console.log(uuidv4());
