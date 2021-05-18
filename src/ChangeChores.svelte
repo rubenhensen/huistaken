@@ -3,14 +3,14 @@
 </script>
 
 <form>
-	{#each $chores as { id, name }, i}
+	{#each $chores as { id, chore }, i}
 		<label for="chore{i}">Taak {i + 1}</label>
 		<input
 			class="u-full-width"
 			type="text"
 			placeholder="Taak invullen"
 			id="chore{i}"
-			bind:value={name}
+			bind:value={chore}
 		/>
 	{/each}
 </form>
