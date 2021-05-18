@@ -1,8 +1,8 @@
 import { writable } from 'svelte-local-storage-store'
-import type { Person } from './personDefinition'
-import { Gender } from './personDefinition'
-import type { Chore } from './choreDefinition'
-import type { Matching } from './matchingDefinition'
+import type { Person } from './types/personDefinition'
+import { Gender } from './types/personDefinition'
+import type { Chore } from './types/choreDefinition'
+import type { Matching } from './types/matchingDefinition'
 
 export const names = writable<Person[]>('names', [
     { id: 0, name: "Ruben", gender: Gender.Male},
