@@ -9,6 +9,25 @@
     "validate": "svelte-check",
     "test": "jest"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.svelte$": [
+        "svelte-jester",
+        {
+          "preprocess": true
+        }
+      ],
+      "^.+\\.ts$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "svelte"
+    ]
+  },
+  "setupFilesAfterEnv": [
+    "@testing-library/jest-dom/extend-expect"
+  ],
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
@@ -17,6 +36,8 @@
     "@rollup/plugin-commonjs": "^19.0.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
     "@rollup/plugin-typescript": "^8.0.0",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/svelte": "^3.0.3",
     "@tsconfig/svelte": "^1.0.0",
     "@types/jest": "^26.0.23",
     "@types/uuid": "^8.3.0",
@@ -30,10 +51,12 @@
     "rollup-plugin-terser": "^7.0.0",
     "svelte": "^3.0.0",
     "svelte-check": "^1.0.0",
+    "svelte-jester": "^1.5.0",
     "svelte-local-storage-store": "^0.1.5",
-    "svelte-preprocess": "^4.0.0",
+    "svelte-preprocess": "^4.7.3",
+    "ts-jest": "^26.5.6",
     "tslib": "^2.0.0",
-    "typescript": "^4.0.0"
+    "typescript": "^4.2.4"
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
