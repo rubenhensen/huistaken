@@ -3,12 +3,12 @@ import '@testing-library/jest-dom/extend-expect'
 
 import { render, fireEvent } from '@testing-library/svelte'
 
-import Comp from '../src/ExampleTestComponent.svelte'
+import Comp from '../src/Jest.svelte'
 
 test('shows proper heading when rendered', () => {
   const { getByText } = render(Comp, { name: 'World' })
 
-  expect(getByText('Hello World!')).toBeInTheDocument() 
+  expect(getByText('Hello World!')).toBeInTheDocument()
 })
 
 // Note: This is as an async test as we are using `fireEvent`
