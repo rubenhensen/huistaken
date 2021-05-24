@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Chores from './Chores.svelte';
+	import Chores from './CurrentChores.svelte';
 	import ChangeNames from './ChangeNames.svelte';
 	import ChangeChores from './ChangeChores.svelte';
 	
