@@ -13,7 +13,7 @@
 <main>
   <div class="container">
     <div class="row">
-      	<div class="one-half column" style="margin-top: 25%">
+      	<div class="ten columns">
 		  
 			<h1>Huistaken generator 2000</h1>
 			<button class="button button-primary active" 
