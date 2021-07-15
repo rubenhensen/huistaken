@@ -29,16 +29,16 @@ export const chores = writable<Chore[]>('chores', [
     { id: 9, chore: "WC/Douche meisjes"}])
 
 export const currentMatching = writable<Matching[]>('currentMatching',[
-    { personId: 0, choreId: 0, completed: true },
-    { personId: 1, choreId: 1, completed: true },
-    { personId: 2, choreId: 2, completed: true },
-    { personId: 3, choreId: 3, completed: true },
-    { personId: 4, choreId: 4, completed: true },
-    { personId: 5, choreId: 5, completed: true },
-    { personId: 6, choreId: 6, completed: true },
-    { personId: 7, choreId: 7, completed: true },
-    { personId: 8, choreId: 8, completed: true },
-    { personId: 9, choreId: 9, completed: true },])
+    { personId: 0, choreId: 0, completed: false },
+    { personId: 1, choreId: 1, completed: false },
+    { personId: 2, choreId: 2, completed: false },
+    { personId: 3, choreId: 3, completed: false },
+    { personId: 4, choreId: 4, completed: false },
+    { personId: 5, choreId: 5, completed: false },
+    { personId: 6, choreId: 6, completed: false },
+    { personId: 7, choreId: 7, completed: false },
+    { personId: 8, choreId: 8, completed: false },
+    { personId: 9, choreId: 9, completed: false },])
 
 export const archiveWeeks = writable<Matching[][]>('archiveWeeks', [])
 

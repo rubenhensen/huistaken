@@ -14,7 +14,6 @@
   <div class="container">
     <div class="row">
       	<div class="ten columns">
-		  
 			<h1>Huistaken generator 2000</h1>
 			<button class="button button-primary active" 
 				on:click="{() => changePage("Chores")}"
@@ -46,8 +45,6 @@
 			{#if page == "ChangeChores"}
 			<ChangeChores />
 			{/if}
-
-
 		</div>
     </div>
   </div>
