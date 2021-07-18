@@ -17,16 +17,16 @@ export const names = writable<Person[]>('names', [
     { id: 9, name: "Melki", gender: Gender.Male },])
 
 export const chores = writable<Chore[]>('chores', [
-    { id: 0, chore: "Keuken"},
-    { id: 1, chore: "Keuken"},
-    { id: 2, chore: "Woonkamer"},
-    { id: 3, chore: "Woonkamer"},
-    { id: 4, chore: "Gang"},
-    { id: 5, chore: "Apparaten en washok"},
-    { id: 6, chore: "Oud papier en glas"},
-    { id: 7, chore: "Oud papier en glas"},
-    { id: 8, chore: "WC/Douche jongens"},
-    { id: 9, chore: "WC/Douche meisjes"}])
+    { id: 0, chore: "Keuken", gender: Gender.Other},
+    { id: 1, chore: "Keuken", gender: Gender.Other},
+    { id: 2, chore: "Woonkamer", gender: Gender.Other},
+    { id: 3, chore: "Woonkamer", gender: Gender.Other},
+    { id: 4, chore: "Gang", gender: Gender.Other},
+    { id: 5, chore: "Apparaten en washok", gender: Gender.Other},
+    { id: 6, chore: "Oud papier en glas", gender: Gender.Other},
+    { id: 7, chore: "Oud papier en glas", gender: Gender.Other},
+    { id: 8, chore: "WC/Douche jongens", gender: Gender.Male},
+    { id: 9, chore: "WC/Douche meisjes", gender: Gender.Female}])
 
 export const currentMatching = writable<Matching[]>('currentMatching',[
     { personId: 0, choreId: 0, completed: false },
