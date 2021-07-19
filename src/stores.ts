@@ -10,11 +10,11 @@ export const names = writable<Person[]>('names', [
     { id: 2, name: "Mathijs", gender: Gender.Male },
     { id: 3, name: "Kim", gender: Gender.Female },
     { id: 4, name: "Thomas", gender: Gender.Male },
-    { id: 5, name: "Anna", gender: Gender.Female },
+    { id: 5, name: "Melki", gender: Gender.Male },
     { id: 6, name: "Jette", gender: Gender.Female },
     { id: 7, name: "Manon", gender: Gender.Female },
-    { id: 8, name: "Thomas2", gender: Gender.Male },
-    { id: 9, name: "Melki", gender: Gender.Male },])
+    { id: 8, name: "Neve", gender: Gender.Male },
+    { id: 9, name: "Anna", gender: Gender.Female },])
 
 export const chores = writable<Chore[]>('chores', [
     { id: 0, chore: "Keuken", gender: Gender.Other},
