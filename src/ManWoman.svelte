@@ -14,7 +14,6 @@
 
 </script>
 
-<p>{gender}</p>
 <div style="display: inline;" on:click="{toMale}">
     <Fa size="3x" icon={faMale} 
     primaryColor="blue" 

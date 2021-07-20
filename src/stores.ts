@@ -5,7 +5,7 @@ import type { Chore } from './types/choreDefinition'
 import type { Matching } from './types/matchingDefinition'
 
 export const names = writable<Person[]>('names', [
-    { id: 0, name: "Ruben", gender: Gender.Male},
+    { id: 0, name: "Ruben", gender: Gender.Male },
     { id: 1, name: "Anouk", gender: Gender.Female },
     { id: 2, name: "Mathijs", gender: Gender.Male },
     { id: 3, name: "Kim", gender: Gender.Female },
@@ -17,18 +17,18 @@ export const names = writable<Person[]>('names', [
     { id: 9, name: "Anna", gender: Gender.Female },])
 
 export const chores = writable<Chore[]>('chores', [
-    { id: 0, chore: "Keuken", gender: Gender.Other},
-    { id: 1, chore: "Keuken", gender: Gender.Other},
-    { id: 2, chore: "Woonkamer", gender: Gender.Other},
-    { id: 3, chore: "Woonkamer", gender: Gender.Other},
-    { id: 4, chore: "Gang", gender: Gender.Other},
-    { id: 5, chore: "Apparaten en washok", gender: Gender.Other},
-    { id: 6, chore: "Oud papier en glas", gender: Gender.Other},
-    { id: 7, chore: "Oud papier en glas", gender: Gender.Other},
-    { id: 8, chore: "WC/Douche jongens", gender: Gender.Male},
-    { id: 9, chore: "WC/Douche meisjes", gender: Gender.Female}])
+    { id: 0, chore: "Keuken", gender: Gender.Other },
+    { id: 1, chore: "Keuken", gender: Gender.Other },
+    { id: 2, chore: "Woonkamer", gender: Gender.Other },
+    { id: 3, chore: "Woonkamer", gender: Gender.Other },
+    { id: 4, chore: "Gang", gender: Gender.Other },
+    { id: 5, chore: "Apparaten en washok", gender: Gender.Other },
+    { id: 6, chore: "Oud papier en glas", gender: Gender.Other },
+    { id: 7, chore: "Oud papier en glas", gender: Gender.Other },
+    { id: 8, chore: "WC/Douche jongens", gender: Gender.Male },
+    { id: 9, chore: "WC/Douche meisjes", gender: Gender.Female }])
 
-export const currentMatching = writable<Matching[]>('currentMatching',[
+export const currentMatching = writable<Matching[]>('currentMatching', [
     { personId: 0, choreId: 0, completed: false },
     { personId: 1, choreId: 1, completed: false },
     { personId: 2, choreId: 2, completed: false },

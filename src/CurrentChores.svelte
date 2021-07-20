@@ -5,6 +5,9 @@
   import { Gender } from "./types/personDefinition";
 
   function createNewChores(): void {
+    // TODO: show error message is tasks and names don't match in size
+
+    const PREVIOUS_WEEKS_CHECKED = 10;
     const CHORES_SIZE = 10;
     const NAMES_SIZE = 10;
     archiveWeeks.update((arr) => [...arr, $currentMatching]);
@@ -17,21 +20,21 @@
     let b = new Array(CHORES_SIZE);
     for (let i = 0; i < NAMES_SIZE; i++) {
       b = new Array(CHORES_SIZE);
-      for (let j = 0; j < CHORES_SIZE; j++) {        
+      for (let j = 0; j < CHORES_SIZE; j++) {
         b[j] = true;
       }
       graph[i] = b;
     }
 
     let lowestIndex: number;
-    $archiveWeeks.length < 10
+    $archiveWeeks.length < PREVIOUS_WEEKS_CHECKED
       ? (lowestIndex = 0)
-      : (lowestIndex = $archiveWeeks.length - 10);
+      : (lowestIndex = $archiveWeeks.length - PREVIOUS_WEEKS_CHECKED);
 
     // Loop through archive last 10 weeks or max
     // Remove all previously completed tasks
     for (let i = lowestIndex; i < $archiveWeeks.length; i++) {
-      for (let j = 0; j < 10; j++) {
+      for (let j = 0; j < $archiveWeeks[i].length; j++) {
         if ($archiveWeeks[i][j].completed) {
           let personNode = $archiveWeeks[i][j].personId;
           let choreNode = $archiveWeeks[i][j].choreId;
@@ -41,10 +44,10 @@
     }
 
     // Remove man chores from women and vica versa.
-    for (let k = 0; k < 10; k++) {
+    for (let k = 0; k < CHORES_SIZE; k++) {
       // Remove men from women chores
       if ($chores[k].gender == Gender.Female) {
-        for (let m = 0; m < 10; m++) {
+        for (let m = 0; m < NAMES_SIZE; m++) {
           if ($names[m].gender == Gender.Male) {
             graph[m][k] = false;
           }
@@ -53,11 +56,23 @@
 
       // Remove women from men chores
       if ($chores[k].gender == Gender.Male) {
-        for (let m = 0; m < 10; m++) {
+        for (let m = 0; m < NAMES_SIZE; m++) {
           if ($names[m].gender == Gender.Female) {
             graph[m][k] = false;
           }
         }
+      }
+    }
+
+    // If chore not done, make it their only option
+    for (let i = 0; i < NAMES_SIZE; i++) {
+      if (!$archiveWeeks.slice(-1)[0][i].completed) {
+        let personId = $archiveWeeks.slice(-1)[0][i].personId;
+        let choreId = $archiveWeeks.slice(-1)[0][i].choreId;
+        for (let j = 0; j < CHORES_SIZE; j++) {
+          graph[personId][j] = false;
+        }
+        graph[personId][choreId] = true;
       }
     }
 
@@ -87,10 +102,14 @@
       }
 
       // Matching not found, re-add week 10, then 9, then 8...
-      for (let j = 0; j < 10; j++) {
+      for (let j = 0; j < PREVIOUS_WEEKS_CHECKED; j++) {
         let personNode = $archiveWeeks[i][j].personId;
         let choreNode = $archiveWeeks[i][j].choreId;
-        graph[personNode][choreNode] = true;
+
+        // Don't add options if they didn't do their chore
+        if ($archiveWeeks.slice(-1)[0][personNode].completed) {
+          graph[personNode][choreNode] = true;
+        }
       }
     }
     let newMatching = [];
@@ -105,6 +124,8 @@
 
     currentMatching.set(newMatching);
   }
+
+
 </script>
 
 <!-- <a href="/"><Fa icon={faAngleDoubleLeft} /></a> 27 mei <a href="/"><Fa icon={faAngleDoubleRight} /></a> -->
