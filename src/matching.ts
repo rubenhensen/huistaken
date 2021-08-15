@@ -19,7 +19,11 @@ export function matchAndUpdate(currentMatching: Writable<Matching[]>,
 
 
     // TODO: show error message is tasks and names don't match in size
-    let archiveWeeksValue: Matching[][] = get(archiveWeeks);
+    let archiveWeeksValue: Matching[][];
+	archiveWeeks.subscribe(value => {
+		archiveWeeksValue = value;
+	});
+
     let currentMatchingValue: Matching[] = get(currentMatching);
     let choresValue: Chore[] = get(chores);
     let namesValue: Person[] = get(names);
@@ -46,7 +50,6 @@ export function match(
     const MATCH_SIZE = activeChores.filter(n => n.activeChore).length;
     const ABSENT_IDS = absence.filter(n => !n.present).map(n => n.personId);
     const INACTIVE_CHORES_IDS = activeChores.filter(n => !n.activeChore).map(n => n.choreId);
-    console.log(MATCH_SIZE);
     // Create matching double array full true booleans except no task
     let graph = new Array(NAMES_SIZE);
     let b = new Array(CHORES_SIZE);

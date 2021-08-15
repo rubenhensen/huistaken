@@ -1,16 +1,20 @@
 <script lang="ts">
-  import { absence, names, nrPresent } from "../stores";
+  import { absence, names, nrPresent, currentMatching, archiveWeeks, activeChores, chores } from "../stores";
   import YesNo from "../components/YesNo.svelte";
   export const location = null;
   import { navigate } from "svelte-routing";
-  
+  import { matchAndUpdate} from "../matching"
+
   function click() {
     // Check number of absences
     $nrPresent = $absence.filter(n => n.present).length;
     if ($nrPresent < 10) {
       navigate("/choose-chores", {replace: false});
     } else {
-      navigate("/",)
+      $activeChores.forEach(n => n.activeChore = true);
+      let match = matchAndUpdate(currentMatching, archiveWeeks, chores, names, absence, activeChores);
+      currentMatching.set(match);
+      navigate("/")
     }
   }
 </script>

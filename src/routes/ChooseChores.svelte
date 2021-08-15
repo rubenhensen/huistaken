@@ -1,15 +1,16 @@
 <script lang="ts">
-  import { activeChores, nrPresent, chores } from "../stores";
+  import { absence, names, nrPresent, currentMatching, archiveWeeks, activeChores, chores } from "../stores";
   import YesNo from "../components/YesNo.svelte";
   export const location = null;
   import { navigate } from "svelte-routing";
+  import { matchAndUpdate} from "../matching"
 
   $: isDisabled =
     $activeChores.filter((n) => n.activeChore).length !== $nrPresent;
 
   function click() {
-    // Write matching function with subset of chores and names
-
+    let match = matchAndUpdate(currentMatching, archiveWeeks, chores, names, absence, activeChores);
+    currentMatching.set(match);
     navigate('/')
   }
 </script>
