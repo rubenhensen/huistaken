@@ -1,6 +1,7 @@
 <script lang="ts">
-	import ManWoman from "./ManWoman.svelte";
-	import { names } from "./stores";
+	import ManWoman from "../components/ManWoman.svelte";
+	import { names } from "../stores";
+	export const location = null;
 </script>
 
 <form>

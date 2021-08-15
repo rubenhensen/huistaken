@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { chores } from "./stores";
+	import { chores } from "../stores";
+
+	export const location = null;
 </script>
 
 <form>

@@ -2,7 +2,7 @@
 	import Fa from 'svelte-fa'
 	import { faTimes, faCheck } from '@fortawesome/free-solid-svg-icons'
     export let completed : boolean;
-
+    
     function changeToCompleted() {
         completed = true;
     }

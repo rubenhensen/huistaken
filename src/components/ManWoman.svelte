@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Fa from 'svelte-fa'
-    import { Gender } from './types/personDefinition'
+    import { Gender } from '../types/personDefinition'
 	import { faFemale, faMale } from '@fortawesome/free-solid-svg-icons'
     export let gender : Gender;
 
