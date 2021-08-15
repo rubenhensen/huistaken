@@ -1,23 +1,16 @@
 <script lang="ts">
   import { absence, names, nrPresent } from "../stores";
   import YesNo from "../components/YesNo.svelte";
-  import findMatching from "randomized-hopcroft-karp";
-  import { Gender } from "../types/personDefinition";
   export const location = null;
   import { navigate } from "svelte-routing";
-
-  import { showNav } from "../stores";
-
-  $showNav = false;
-
+  
   function click() {
-// Check number of absences
+    // Check number of absences
     $nrPresent = $absence.filter(n => n.present).length;
     if ($nrPresent < 10) {
-      navigate("/choose-chores");
+      navigate("/choose-chores", {replace: false});
     } else {
-      $showNav = true;
-      navigate("/")
+      navigate("/",)
     }
   }
 </script>

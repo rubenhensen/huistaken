@@ -1,16 +1,11 @@
 <script lang="ts">
-  import { activeChores, nrPresent, chores, showNav } from "../stores";
+  import { activeChores, nrPresent, chores } from "../stores";
   import YesNo from "../components/YesNo.svelte";
-  import findMatching from "randomized-hopcroft-karp";
-  import { Gender } from "../types/personDefinition";
   export const location = null;
   import { navigate } from "svelte-routing";
-  import { match } from "../matching"
 
   $: isDisabled =
     $activeChores.filter((n) => n.activeChore).length !== $nrPresent;
-
-  $showNav = false;
 
   function click() {
     // Write matching function with subset of chores and names

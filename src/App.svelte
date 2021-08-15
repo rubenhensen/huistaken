@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Nav from "./components/Nav.svelte";
-	import { showNav } from "./stores";
 
 	import { Router, Link, Route, navigate } from "svelte-routing";
 	import CurrentChores from "./routes/CurrentChores.svelte";
@@ -15,13 +14,11 @@
 
 <main>
 	<Router {url}>
-		{#if $showNav}
-			<Nav />
-		{/if}
 		<div class="container">
 			<div class="row">
 				<div class="ten columns">
 					<h1>Huistaken generator 2000</h1>
+					<Nav />
 					<Route path="choose-chores" component={ChooseChores} />
 					<Route path="completion" component={CheckChoreCompletion} />
 					<Route path="absence" component={CheckAbsence} />

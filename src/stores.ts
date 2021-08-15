@@ -70,7 +70,4 @@ export const activeChores = writable<ActiveChores[]>('activeChores', [
 
 export const archiveWeeks = writable<Matching[][]>('archiveWeeks', [])
 
-export const showNav = svelteWritable<boolean>(true);
-
 export const nrPresent = svelteWritable<number>(10);
-

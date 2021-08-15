@@ -1,21 +1,11 @@
 <script lang="ts">
-  import { absence, currentMatching, names, chores, showNav } from "../stores";
-  import YesNo from "../components/YesNo.svelte";
-
-  import findMatching from "randomized-hopcroft-karp";
-  import { Gender } from "../types/personDefinition";
   export const location = null;
+
+  import { currentMatching, names, chores} from "../stores";
+  import YesNo from "../components/YesNo.svelte";
   import { link } from "svelte-routing";
-
-  import { navigate } from "svelte-routing";
-
-  function click() {
-    $showNav = false;
-    navigate("/absence");
-  }
 </script>
 
-<!-- <a href="/"><Fa icon={faAngleDoubleLeft} /></a> 27 mei <a href="/"><Fa icon={faAngleDoubleRight} /></a> -->
 <table class="u-full-width">
   <thead>
     <tr>
@@ -35,4 +25,6 @@
   </tbody>
 </table>
 
-<button class="button button-primary active" on:click={click}> Volgende </button>
+<a href="absence" use:link><button class="button button-primary active">
+  Volgende
+</button></a>

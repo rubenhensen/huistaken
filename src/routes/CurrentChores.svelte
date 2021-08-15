@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { currentMatching, chores, names, archiveWeeks } from "../stores";
+  import { currentMatching, chores, names } from "../stores";
   export const location = null;
 </script>
 
