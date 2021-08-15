@@ -30,7 +30,8 @@ export const chores = writable<Chore[]>('chores', [
     { id: 6, chore: "Oud papier en glas", gender: Gender.Other },
     { id: 7, chore: "Oud papier en glas", gender: Gender.Other },
     { id: 8, chore: "WC/Douche jongens", gender: Gender.Male },
-    { id: 9, chore: "WC/Douche meisjes", gender: Gender.Female }])
+    { id: 9, chore: "WC/Douche meisjes", gender: Gender.Female },
+    { id: 10, chore: "Geen taak", gender: Gender.Other}])
 
 export const currentMatching = writable<Matching[]>('currentMatching', [
     { personId: 0, choreId: 0, completed: false },

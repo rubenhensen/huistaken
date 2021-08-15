@@ -1,70 +1,79 @@
 import { currentMatching, chores, names, archiveWeeks } from "./stores";
 import type { Writable } from "svelte/store";
+import { get } from "svelte/store";
+import findMatching from "randomized-hopcroft-karp";
+
 import type { Matching } from "./types/matchingDefinition";
 import type { Chore } from "./types/choreDefinition";
 import type { Person } from "./types/personDefinition";
-// import type { Abscence } from "./types/absenceDefinition";
-import { get } from "svelte/store";
-import findMatching from "randomized-hopcroft-karp";
+import type { Absence } from "./types/absenceDefinition";
+import type { ActiveChores } from "./types/activeChoresDefinition";
 import { Gender } from "./types/personDefinition";
 
+export function matchAndUpdate(currentMatching: Writable<Matching[]>,
+    archiveWeeks: Writable<Matching[][]>,
+    chores: Writable<Chore[]>,
+    names: Writable<Person[]>,
+    absence: Writable<Absence[]>,
+    activeChores: Writable<ActiveChores[]>): any[] {
 
-export function match(currentMatching: Writable<Matching[]>, archiveWeeks: Writable<Matching[][]>, chores: Writable<Chore[]>, names: Writable<Person[]>): void {
+
+    // TODO: show error message is tasks and names don't match in size
+    let archiveWeeksValue: Matching[][] = get(archiveWeeks);
+    let currentMatchingValue: Matching[] = get(currentMatching);
+    let choresValue: Chore[] = get(chores);
+    let namesValue: Person[] = get(names);
+    let activeChoreValue: ActiveChores[] = get(activeChores);
+    let absenceValue: Absence[] = get(absence);
+
+    archiveWeeks.update((arr) => [...arr, currentMatchingValue]);
+
+    return match(archiveWeeksValue, choresValue, namesValue, absenceValue, activeChoreValue);
+}
+
+export function match(
+    archiveWeeks: Matching[][],
+    chores: Chore[],
+    names: Person[],
+    absence: Absence[],
+    activeChores: ActiveChores[]): any[] {
     // TODO: show error message is tasks and names don't match in size
 
     const PREVIOUS_WEEKS_CHECKED = 10;
-    const CHORES_SIZE = 10;
+    const CHORES_SIZE = 11;
     const NAMES_SIZE = 10;
 
-    let currentMatchingValue;
-	currentMatching.subscribe(value => {
-		currentMatchingValue = value;
-	});
-
-    let archiveWeeksValue;
-	archiveWeeks.subscribe(value => {
-		archiveWeeksValue = value;
-	});
-
-    let choresValue;
-	chores.subscribe(value => {
-		choresValue = value;
-	});
-
-    let namesValue;
-	names.subscribe(value => {
-		namesValue = value;
-	});
-
-
-    archiveWeeks.update((arr) => [...arr, currentMatchingValue]);
-    archiveWeeksValue.forEach((week) => { });
-
-    // Create full matching double array
-    // let graph = new Array(10).fill(new Array(10).fill(true));
-
+    const MATCH_SIZE = activeChores.filter(n => n.activeChore).length;
+    const ABSENT_IDS = absence.filter(n => !n.present).map(n => n.personId);
+    const INACTIVE_CHORES_IDS = activeChores.filter(n => !n.activeChore).map(n => n.choreId);
+    console.log(MATCH_SIZE);
+    // Create matching double array full true booleans except no task
     let graph = new Array(NAMES_SIZE);
     let b = new Array(CHORES_SIZE);
     for (let i = 0; i < NAMES_SIZE; i++) {
         b = new Array(CHORES_SIZE);
         for (let j = 0; j < CHORES_SIZE; j++) {
-            b[j] = true;
+            if (j == 10) {
+                b[j] = false;
+            } else {
+                b[j] = true;
+            }
         }
         graph[i] = b;
     }
 
     let lowestIndex: number;
-    archiveWeeksValue.length < PREVIOUS_WEEKS_CHECKED
+    archiveWeeks.length < PREVIOUS_WEEKS_CHECKED
         ? (lowestIndex = 0)
-        : (lowestIndex = archiveWeeksValue.length - PREVIOUS_WEEKS_CHECKED);
+        : (lowestIndex = archiveWeeks.length - PREVIOUS_WEEKS_CHECKED);
 
     // Loop through archive last 10 weeks or max
     // Remove all previously completed tasks
-    for (let i = lowestIndex; i < archiveWeeksValue.length; i++) {
-        for (let j = 0; j < archiveWeeksValue[i].length; j++) {
-            if (archiveWeeksValue[i][j].completed) {
-                let personNode = archiveWeeksValue[i][j].personId;
-                let choreNode = archiveWeeksValue[i][j].choreId;
+    for (let i = lowestIndex; i < archiveWeeks.length; i++) {
+        for (let j = 0; j < archiveWeeks[i].length; j++) {
+            if (archiveWeeks[i][j].completed) {
+                let personNode = archiveWeeks[i][j].personId;
+                let choreNode = archiveWeeks[i][j].choreId;
                 graph[personNode][choreNode] = false;
             }
         }
@@ -73,18 +82,18 @@ export function match(currentMatching: Writable<Matching[]>, archiveWeeks: Writa
     // Remove man chores from women and vica versa.
     for (let k = 0; k < CHORES_SIZE; k++) {
         // Remove men from women chores
-        if (choresValue[k].gender == Gender.Female) {
+        if (chores[k].gender == Gender.Female) {
             for (let m = 0; m < NAMES_SIZE; m++) {
-                if (namesValue[m].gender == Gender.Male) {
+                if (names[m].gender == Gender.Male) {
                     graph[m][k] = false;
                 }
             }
         }
 
         // Remove women from men chores
-        if (choresValue[k].gender == Gender.Male) {
+        if (chores[k].gender == Gender.Male) {
             for (let m = 0; m < NAMES_SIZE; m++) {
-                if (namesValue[m].gender == Gender.Female) {
+                if (names[m].gender == Gender.Female) {
                     graph[m][k] = false;
                 }
             }
@@ -93,15 +102,31 @@ export function match(currentMatching: Writable<Matching[]>, archiveWeeks: Writa
 
     // If chore not done, make it their only option
     for (let i = 0; i < NAMES_SIZE; i++) {
-        if (!archiveWeeksValue.slice(-1)[0][i].completed) {
-            let personId = archiveWeeksValue.slice(-1)[0][i].personId;
-            let choreId = archiveWeeksValue.slice(-1)[0][i].choreId;
-            for (let j = 0; j < CHORES_SIZE; j++) {
-                graph[personId][j] = false;
+        if (archiveWeeks.length != 0) {
+            if (!archiveWeeks.slice(-1)[0][i].completed) {
+                let personId = archiveWeeks.slice(-1)[0][i].personId;
+                let choreId = archiveWeeks.slice(-1)[0][i].choreId;
+                for (let j = 0; j < CHORES_SIZE; j++) {
+                    graph[personId][j] = false;
+                }
+                graph[personId][choreId] = true;
             }
-            graph[personId][choreId] = true;
         }
     }
+
+    // Remove inactive chores from being matched
+    INACTIVE_CHORES_IDS.forEach(id => {
+        for (let i = 0; i < NAMES_SIZE; i++) {
+            graph[i][id] = false;
+        }
+    });
+
+    // Remove inactive people from being matched
+    ABSENT_IDS.forEach(id => {
+        for (let i = 0; i < CHORES_SIZE; i++) {
+            graph[id][i] = false;
+        }
+    });
 
     // Loop through last 10 weeks
     // Check if matching is possible
@@ -109,7 +134,7 @@ export function match(currentMatching: Writable<Matching[]>, archiveWeeks: Writa
     // not possible: Add 10th, then 9th, 8th week
     let edges = [];
     let matching = [];
-    for (let i = lowestIndex; i < archiveWeeksValue.length; i++) {
+    for (let i = lowestIndex; i < archiveWeeks.length; i++) {
         // Put all edges in an array
         edges = [];
         for (let k = 0; k < 10; k++) {
@@ -124,23 +149,39 @@ export function match(currentMatching: Writable<Matching[]>, archiveWeeks: Writa
         matching = findMatching(10, 10, edges);
 
         // If matching found, then stop
-        if (matching.length >= 10) {
+        if (matching.length >= MATCH_SIZE) {
             break;
         }
 
         // Matching not found, re-add week 10, then 9, then 8...
-        for (let j = 0; j < PREVIOUS_WEEKS_CHECKED; j++) {
-            let personNode = archiveWeeksValue[i][j].personId;
-            let choreNode = archiveWeeksValue[i][j].choreId;
+        for (let j = 0; j < archiveWeeks[i].length; j++) {
+            let personNode = archiveWeeks[i][j].personId;
+            let choreNode = archiveWeeks[i][j].choreId;
 
-            // Don't add options if they didn't do their chore
-            if (archiveWeeksValue.slice(-1)[0][personNode].completed) {
-                graph[personNode][choreNode] = true;
+            // Don't add options if: they didn't do their chore
+            if (!archiveWeeks.slice(-1)[0][personNode].completed) {
+                break;
             }
+
+            // it is the 'no task'-task
+            if (choreNode == 10) {
+                break;
+            }
+
+            // it is an absent person
+            if (ABSENT_IDS.includes(personNode)) {
+                break;
+            }
+
+            // if it is an inactive task
+            if (INACTIVE_CHORES_IDS.includes(choreNode)) {
+                break;
+            }
+            graph[personNode][choreNode] = true;
         }
     }
     let newMatching = [];
-
+    console.log(matching)
     matching.forEach((match) => {
         newMatching.push({
             personId: match[0],
@@ -149,5 +190,15 @@ export function match(currentMatching: Writable<Matching[]>, archiveWeeks: Writa
         });
     });
 
-    currentMatching.set(newMatching);
+    for (let i = 0; i < NAMES_SIZE; i++) {
+        if (!newMatching.find(n => n.personId == i)) {
+            newMatching.push({
+                personId: i,
+                choreId: 10,
+                completed: false,
+            });
+        }
+    }
+
+    return newMatching;
 }
