@@ -23,6 +23,11 @@
 			Nieuwe huistaken
 		</button></a
 	>
+	<a href="add-history" use:link
+	><button class="button button-primary active">
+		Geschiedenis toevoegen
+	</button></a
+>
 </nav>
 
 <style>

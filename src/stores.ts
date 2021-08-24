@@ -1,4 +1,4 @@
-import { writable as svelteWritable} from 'svelte/store';
+import { writable as svelteWritable, derived} from 'svelte/store';
 import { writable } from 'svelte-local-storage-store'
 import type { Person } from './types/personDefinition'
 import { Gender } from './types/personDefinition'

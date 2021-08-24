@@ -8,7 +8,7 @@
 	import CheckAbsence from "./routes/CheckAbsence.svelte";
 	import CheckChoreCompletion from "./routes/CheckChoreCompletion.svelte";
 	import ChooseChores from "./routes/ChooseChores.svelte";
-
+	import AddHistory from "./routes/AddHistory.svelte";
 	export let url = "";
 </script>
 
@@ -16,16 +16,15 @@
 	<Router {url}>
 		<div class="container">
 			<div class="row">
-				<div class="ten columns">
-					<h1>Huistaken generator 2000</h1>
-					<Nav />
-					<Route path="choose-chores" component={ChooseChores} />
-					<Route path="completion" component={CheckChoreCompletion} />
-					<Route path="absence" component={CheckAbsence} />
-					<Route path="names" component={ChangeNames} />
-					<Route path="change-chores" component={ChangeChores} />
-					<Route path="/"><CurrentChores /></Route>
-				</div>
+				<h1>Huistaken generator 2000</h1>
+				<Nav />
+				<Route path="choose-chores" component={ChooseChores} />
+				<Route path="completion" component={CheckChoreCompletion} />
+				<Route path="absence" component={CheckAbsence} />
+				<Route path="names" component={ChangeNames} />
+				<Route path="change-chores" component={ChangeChores} />
+				<Route path="add-history" component={AddHistory} />
+				<Route path="/"><CurrentChores /></Route>
 			</div>
 		</div>
 	</Router>
