@@ -1,4 +1,4 @@
-import { writable as svelteWritable } from 'svelte/store';
+import { writable as svelteWritable, derived} from 'svelte/store';
 import { writable } from 'svelte-local-storage-store'
 import type { Person } from './types/personDefinition'
 import { Gender } from './types/personDefinition'
@@ -6,7 +6,6 @@ import type { Chore } from './types/choreDefinition'
 import type { Matching } from './types/matchingDefinition'
 import type { Absence } from './types/absenceDefinition'
 import type { ActiveChores } from './types/activeChoresDefinition'
-// import CurrentChores from './pages/CurrentChores.svelte';
 
 export const names = writable<Person[]>('names', [
     { id: 0, name: "Thomas", gender: Gender.Male },

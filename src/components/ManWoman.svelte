@@ -5,11 +5,19 @@
     export let gender : Gender;
 
     function toMale() {
-        gender = Gender.Male;
+        if (gender == Gender.Male) {
+            gender = Gender.Other;
+        } else {
+            gender = Gender.Male;
+        }
     }
 
     function toFemale() {
-        gender = Gender.Female;
+        if (gender == Gender.Female) {
+            gender = Gender.Other;
+        } else {
+            gender = Gender.Female;
+        }
     }
 
 </script>
