@@ -69,31 +69,6 @@ export const activeChores = writable<ActiveChores[]>('activeChores', [
     { choreId: 8, activeChore: true },
     { choreId: 9, activeChore: true },])
 
-export const archiveWeeks = writable<Matching[][]>('archiveWeeks', [
-    [
-        { personId: 0, choreId: 0, completed: true },
-        { personId: 1, choreId: 6, completed: true },
-        { personId: 2, choreId: 2, completed: false },
-        { personId: 3, choreId: 9, completed: true },
-        { personId: 4, choreId: 4, completed: true },
-        { personId: 5, choreId: 8, completed: true },
-        { personId: 6, choreId: 5, completed: true },
-        { personId: 7, choreId: 1, completed: true },
-        { personId: 8, choreId: 7, completed: true },
-        { personId: 9, choreId: 3, completed: true },
-    ],
-    [
-        { personId: 0, choreId: 1, completed: true },
-        { personId: 1, choreId: 2, completed: true },
-        { personId: 2, choreId: 10, completed: true },
-        { personId: 3, choreId: 4, completed: false },
-        { personId: 4, choreId: 3, completed: true },
-        { personId: 5, choreId: 6, completed: true },
-        { personId: 6, choreId: 8, completed: true },
-        { personId: 7, choreId: 0, completed: true },
-        { personId: 8, choreId: 5, completed: true },
-        { personId: 9, choreId: 9, completed: true },
-    ],
-])
+export const archiveWeeks = writable<Matching[][]>('archiveWeeks', [])
 
 export const nrPresent = svelteWritable<number>(10);
