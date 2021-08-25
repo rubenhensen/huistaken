@@ -1,7 +1,7 @@
 interface Matching {
-    personId: number,
-    choreId: number,
-    completed: boolean
+	personId: number;
+	choreId: number;
+	completed: boolean;
 }
 
 export type { Matching };

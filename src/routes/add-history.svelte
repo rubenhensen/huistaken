@@ -1,24 +1,25 @@
 <script lang="ts">
-	import { chores, names, archiveWeeks } from "../stores";
-	import YesNo from "../lib/YesNo.svelte";
+	import { chores, names, archiveWeeks } from '../stores';
+	import YesNo from '../lib/YesNo.svelte';
 	import { goto } from '$app/navigation';
 	export const location = null;
 
 	function click(recent) {
-		let newHistory = []
+		let newHistory = [];
 		for (let i = 0; i < $names.length; i++) {
-			let obj = { 
-				personId: i, 
-				choreId: selectedChore[i], 
-				completed: selectedDone[i] };
+			let obj = {
+				personId: i,
+				choreId: selectedChore[i],
+				completed: selectedDone[i]
+			};
 			newHistory = [...newHistory, obj];
 		}
 		if (recent) {
-			archiveWeeks.set([...$archiveWeeks, newHistory])
-			goto('/')
+			archiveWeeks.set([...$archiveWeeks, newHistory]);
+			goto('/');
 		} else {
-			archiveWeeks.set([newHistory, ...$archiveWeeks])
-			goto('/')
+			archiveWeeks.set([newHistory, ...$archiveWeeks]);
+			goto('/');
 		}
 	}
 
@@ -40,8 +41,7 @@
 	</div>
 
 	{#each $names as { name }, i}
-	<div class="row">
-
+		<div class="row">
 			<div class="three columns">
 				<p>{name}</p>
 			</div>
@@ -57,21 +57,10 @@
 			<div class="two columns">
 				<YesNo bind:completed={selectedDone[i]} />
 			</div>
-
-	</div>
+		</div>
 	{/each}
 </form>
 
-<button
-  class="button button-primary active"
-  on:click={() => click(false)}
->
-  Voeg oud toe
-</button>
+<button class="button button-primary active" on:click={() => click(false)}> Voeg oud toe </button>
 
-<button
-  class="button button-primary active"
-  on:click={() => click(true)}
->
-  Voeg recent toe
-</button>
+<button class="button button-primary active" on:click={() => click(true)}> Voeg recent toe </button>

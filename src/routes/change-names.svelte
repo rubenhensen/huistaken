@@ -1,6 +1,6 @@
 <script lang="ts">
-	import ManWoman from "../lib/ManWoman.svelte";
-	import { names } from "../stores";
+	import ManWoman from '../lib/ManWoman.svelte';
+	import { names } from '../stores';
 	export const location = null;
 </script>
 
@@ -13,7 +13,7 @@
 			<b>Geslacht</b>
 		</div>
 	</div>
-	{#each $names as { name, gender}, i}
+	{#each $names as { name, gender }, i}
 		<div class="row">
 			<div class="six columns">
 				<label for="name{i}">Naam {i + 1}</label>

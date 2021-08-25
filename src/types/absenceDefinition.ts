@@ -1,6 +1,6 @@
 interface Absence {
-    personId: number,
-    present: boolean,
+	personId: number;
+	present: boolean;
 }
 
 export type { Absence };

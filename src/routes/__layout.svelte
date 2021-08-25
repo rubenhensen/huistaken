@@ -9,9 +9,7 @@
 	<slot />
 </main>
 
-<footer>
-	
-</footer>
+<footer />
 
 <style>
 	main {
@@ -31,10 +29,6 @@
 		justify-content: center;
 		align-items: center;
 		padding: 40px;
-	}
-
-	footer a {
-		font-weight: bold;
 	}
 
 	@media (min-width: 480px) {

@@ -1,14 +1,13 @@
 enum Gender {
-    Male,
-    Female,
-    Other
+	Male,
+	Female,
+	Other
 }
 
-
 interface Person {
-    id: number,
-    name: string,
-    gender: Gender
+	id: number;
+	name: string;
+	gender: Gender;
 }
 
 export type { Person };

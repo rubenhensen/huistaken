@@ -5,11 +5,42 @@
 <header>
 	<nav>
 		<ul>
-			<li><a sveltekit:prefetch href="/"><button  class:active={$page.path === '/'} class="button button-primary">Huidige huistaken</button></a></li>
-			<li><a sveltekit:prefetch href="/change-names"><button class:active={$page.path === '/change-names'} class="button button-primary">Namen veranderen</button></a></li>
-			<li><a sveltekit:prefetch href="/change-chores"><button class:active={$page.path === '/change-chores'} class="button button-primary">Taken veranderen</button></a></li>
-			<li><a sveltekit:prefetch href="/check-chore-completion"><button class:active={$page.path === '/check-chore-completion'} class="button button-primary">Nieuwe huistaken</button></a></li>
-			<li><a sveltekit:prefetch href="/add-history"><button class:active={$page.path === '/add-history'} class="button button-primary">Geschiedenis toevoegen</button></a></li>
+			<li>
+				<a sveltekit:prefetch href="/"
+					><button class:active={$page.path === '/'} class="button button-primary"
+						>Huidige huistaken</button
+					></a
+				>
+			</li>
+			<li>
+				<a sveltekit:prefetch href="/change-names"
+					><button class:active={$page.path === '/change-names'} class="button button-primary"
+						>Namen veranderen</button
+					></a
+				>
+			</li>
+			<li>
+				<a sveltekit:prefetch href="/change-chores"
+					><button class:active={$page.path === '/change-chores'} class="button button-primary"
+						>Taken veranderen</button
+					></a
+				>
+			</li>
+			<li>
+				<a sveltekit:prefetch href="/check-chore-completion"
+					><button
+						class:active={$page.path === '/check-chore-completion'}
+						class="button button-primary">Nieuwe huistaken</button
+					></a
+				>
+			</li>
+			<li>
+				<a sveltekit:prefetch href="/add-history"
+					><button class:active={$page.path === '/add-history'} class="button button-primary"
+						>Geschiedenis toevoegen</button
+					></a
+				>
+			</li>
 		</ul>
 	</nav>
 </header>
@@ -24,16 +55,6 @@
 		display: flex;
 		justify-content: center;
 		--background: rgba(255, 255, 255, 0.7);
-	}
-
-	svg {
-		width: 2em;
-		height: 3em;
-		display: block;
-	}
-
-	path {
-		fill: var(--background);
 	}
 
 	ul {
@@ -55,19 +76,7 @@
 	}
 
 	button.active {
-		background-color:darkcyan;
-	}
-
-	li.active::before {
-		--size: 6px;
-		content: '';
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: 0;
-		left: calc(50% - var(--size));
-		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--accent-color);
+		background-color: darkcyan;
 	}
 
 	nav a {
