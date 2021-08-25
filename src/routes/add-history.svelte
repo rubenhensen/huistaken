@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { chores, names, archiveWeeks } from "../stores";
-	import YesNo from "../components/YesNo.svelte";
-	import { navigate } from "svelte-routing";
+	import YesNo from "../lib/YesNo.svelte";
+	import { goto } from '$app/navigation';
 	export const location = null;
 
 	function click(recent) {
@@ -15,10 +15,10 @@
 		}
 		if (recent) {
 			archiveWeeks.set([...$archiveWeeks, newHistory])
-			navigate('/')
+			goto('/')
 		} else {
 			archiveWeeks.set([newHistory, ...$archiveWeeks])
-			navigate('/')
+			goto('/')
 		}
 	}
 

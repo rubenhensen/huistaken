@@ -1,29 +1,28 @@
 <script lang="ts">
-	import { link } from "svelte-routing";
 </script>
 
 <nav>
-	<a href="/" use:link
+	<a href="/"
 		><button class="button button-primary active">
 			Huidige huistaken
 		</button></a
 	>
-	<a href="names" use:link
+	<a href="/names"
 		><button class="button button-primary active">
 			Namen veranderen
 		</button></a
 	>
-	<a href="change-chores" use:link
+	<a href="/change-chores"
 		><button class="button button-primary active">
 			Taken veranderen
 		</button></a
 	>
-	<a href="completion" use:link
+	<a href="/completion"
 		><button class="button button-primary active">
 			Nieuwe huistaken
 		</button></a
 	>
-	<a href="add-history" use:link
+	<a href="/add-history"
 	><button class="button button-primary active">
 		Geschiedenis toevoegen
 	</button></a

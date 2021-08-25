@@ -1,9 +1,9 @@
 <script lang="ts">
   import { absence, names, nrPresent, currentMatching, archiveWeeks, activeChores, chores } from "../stores";
-  import YesNo from "../components/YesNo.svelte";
+  import YesNo from "../lib/YesNo.svelte";
   export const location = null;
-  import { navigate } from "svelte-routing";
   import { matchAndUpdate} from "../matching"
+  import { goto } from '$app/navigation';
 
   $: isDisabled =
     $activeChores.filter((n) => n.activeChore).length !== $nrPresent;
@@ -11,7 +11,7 @@
   function click() {
     let match = matchAndUpdate(currentMatching, archiveWeeks, chores, names, absence, activeChores);
     currentMatching.set(match);
-    navigate('/')
+    goto('/')
   }
 </script>
 

@@ -2,8 +2,7 @@
   export const location = null;
 
   import { currentMatching, names, chores} from "../stores";
-  import YesNo from "../components/YesNo.svelte";
-  import { link } from "svelte-routing";
+  import YesNo from "../lib/YesNo.svelte";
 </script>
 
 <table class="u-full-width">
@@ -25,6 +24,6 @@
   </tbody>
 </table>
 
-<a href="absence" use:link><button class="button button-primary active">
+<a href="/absence"><button class="button button-primary active">
   Volgende
 </button></a>

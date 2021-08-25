@@ -1,20 +1,19 @@
 <script lang="ts">
-	import { chores } from "../stores";
-	import ManWoman from "../components/ManWoman.svelte";
-
+	import ManWoman from "../lib/ManWoman.svelte";
+	import { names } from "../stores";
 	export const location = null;
 </script>
 
 <form>
 	<div class="row">
 		<div class="six columns">
-			<b>Taken</b>
+			<b>Namen</b>
 		</div>
 		<div class="two columns" style="padding: 1em">
 			<b>Geslacht</b>
 		</div>
 	</div>
-	{#each $chores as { chore, gender}, i}
+	{#each $names as { name, gender}, i}
 		<div class="row">
 			<div class="six columns">
 				<label for="name{i}">Naam {i + 1}</label>
@@ -23,7 +22,7 @@
 					type="text"
 					placeholder="Naam invullen"
 					id="name{i}"
-					bind:value={chore}
+					bind:value={name}
 				/>
 			</div>
 			<div class="two columns" style="padding: 1em">
