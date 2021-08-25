@@ -17,7 +17,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="ten columns">
-					<h1>Huistaken generator 2000</h1>
+					<h1>Maczekswek huistaken generator 2000</h1>
 					<Nav />
 					<Route path="choose-chores" component={ChooseChores} />
 					<Route path="completion" component={CheckChoreCompletion} />

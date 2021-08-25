@@ -203,5 +203,9 @@ export function match(
         }
     }
 
+    newMatching.sort(function(a, b) { 
+        return a.personId - b.personId  ||  a.choreId - b.choreId;
+      });
+
     return newMatching;
 }

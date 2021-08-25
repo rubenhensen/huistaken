@@ -1,4 +1,4 @@
-import { writable as svelteWritable} from 'svelte/store';
+import { writable as svelteWritable } from 'svelte/store';
 import { writable } from 'svelte-local-storage-store'
 import type { Person } from './types/personDefinition'
 import { Gender } from './types/personDefinition'
@@ -9,15 +9,15 @@ import type { ActiveChores } from './types/activeChoresDefinition'
 // import CurrentChores from './pages/CurrentChores.svelte';
 
 export const names = writable<Person[]>('names', [
-    { id: 0, name: "Ruben", gender: Gender.Male },
-    { id: 1, name: "Anouk", gender: Gender.Female },
-    { id: 2, name: "Mathijs", gender: Gender.Male },
-    { id: 3, name: "Kim", gender: Gender.Female },
-    { id: 4, name: "Thomas", gender: Gender.Male },
+    { id: 0, name: "Thomas", gender: Gender.Male },
+    { id: 1, name: "Kim", gender: Gender.Female },
+    { id: 2, name: "Neve", gender: Gender.Male },
+    { id: 3, name: "Anouk", gender: Gender.Female },
+    { id: 4, name: "Ruben", gender: Gender.Male },
     { id: 5, name: "Melki", gender: Gender.Male },
-    { id: 6, name: "Jette", gender: Gender.Female },
+    { id: 6, name: "Matthijs", gender: Gender.Male },
     { id: 7, name: "Manon", gender: Gender.Female },
-    { id: 8, name: "Neve", gender: Gender.Male },
+    { id: 8, name: "Jette", gender: Gender.Female },
     { id: 9, name: "Anna", gender: Gender.Female },])
 
 export const chores = writable<Chore[]>('chores', [
@@ -31,19 +31,19 @@ export const chores = writable<Chore[]>('chores', [
     { id: 7, chore: "Oud papier en glas", gender: Gender.Other },
     { id: 8, chore: "WC/Douche jongens", gender: Gender.Male },
     { id: 9, chore: "WC/Douche meisjes", gender: Gender.Female },
-    { id: 10, chore: "Geen taak", gender: Gender.Other}])
+    { id: 10, chore: "Geen taak", gender: Gender.Other }])
 
 export const currentMatching = writable<Matching[]>('currentMatching', [
-    { personId: 0, choreId: 0, completed: false },
-    { personId: 1, choreId: 1, completed: false },
-    { personId: 2, choreId: 2, completed: false },
-    { personId: 3, choreId: 3, completed: false },
-    { personId: 4, choreId: 4, completed: false },
-    { personId: 5, choreId: 5, completed: false },
-    { personId: 6, choreId: 6, completed: false },
-    { personId: 7, choreId: 7, completed: false },
-    { personId: 8, choreId: 8, completed: false },
-    { personId: 9, choreId: 9, completed: false },])
+    { personId: 0, choreId: 8, completed: true },
+    { personId: 1, choreId: 9, completed: true },
+    { personId: 2, choreId: 10, completed: true },
+    { personId: 3, choreId: 4, completed: true },
+    { personId: 4, choreId: 6, completed: true },
+    { personId: 5, choreId: 0, completed: true },
+    { personId: 6, choreId: 2, completed: true },
+    { personId: 7, choreId: 1, completed: true },
+    { personId: 8, choreId: 7, completed: true },
+    { personId: 9, choreId: 3, completed: true },])
 
 export const absence = writable<Absence[]>('absence', [
     { personId: 0, present: true },
@@ -69,6 +69,31 @@ export const activeChores = writable<ActiveChores[]>('activeChores', [
     { choreId: 8, activeChore: true },
     { choreId: 9, activeChore: true },])
 
-export const archiveWeeks = writable<Matching[][]>('archiveWeeks', [])
+export const archiveWeeks = writable<Matching[][]>('archiveWeeks', [
+    [
+        { personId: 0, choreId: 0, completed: true },
+        { personId: 1, choreId: 6, completed: true },
+        { personId: 2, choreId: 2, completed: false },
+        { personId: 3, choreId: 9, completed: true },
+        { personId: 4, choreId: 4, completed: true },
+        { personId: 5, choreId: 8, completed: true },
+        { personId: 6, choreId: 5, completed: true },
+        { personId: 7, choreId: 1, completed: true },
+        { personId: 8, choreId: 7, completed: true },
+        { personId: 9, choreId: 3, completed: true },
+    ],
+    [
+        { personId: 0, choreId: 1, completed: true },
+        { personId: 1, choreId: 2, completed: true },
+        { personId: 2, choreId: 10, completed: true },
+        { personId: 3, choreId: 4, completed: false },
+        { personId: 4, choreId: 3, completed: true },
+        { personId: 5, choreId: 6, completed: true },
+        { personId: 6, choreId: 8, completed: true },
+        { personId: 7, choreId: 0, completed: true },
+        { personId: 8, choreId: 5, completed: true },
+        { personId: 9, choreId: 9, completed: true },
+    ],
+])
 
 export const nrPresent = svelteWritable<number>(10);
