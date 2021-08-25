@@ -20,14 +20,14 @@ export const names = writable<Person[]>('names', [
     { id: 9, name: "Anna", gender: Gender.Female },])
 
 export const chores = writable<Chore[]>('chores', [
-    { id: 0, chore: "Keuken", gender: Gender.Other },
-    { id: 1, chore: "Keuken", gender: Gender.Other },
-    { id: 2, chore: "Woonkamer", gender: Gender.Other },
-    { id: 3, chore: "Woonkamer", gender: Gender.Other },
+    { id: 0, chore: "Keuken (1)", gender: Gender.Other },
+    { id: 1, chore: "Keuken (2)", gender: Gender.Other },
+    { id: 2, chore: "Woonkamer (1)", gender: Gender.Other },
+    { id: 3, chore: "Woonkamer (2)", gender: Gender.Other },
     { id: 4, chore: "Gang", gender: Gender.Other },
     { id: 5, chore: "Apparaten en washok", gender: Gender.Other },
-    { id: 6, chore: "Oud papier en glas", gender: Gender.Other },
-    { id: 7, chore: "Oud papier en glas", gender: Gender.Other },
+    { id: 6, chore: "Oud papier en glas (1)", gender: Gender.Other },
+    { id: 7, chore: "Oud papier en glas (2)", gender: Gender.Other },
     { id: 8, chore: "WC/Douche jongens", gender: Gender.Male },
     { id: 9, chore: "WC/Douche meisjes", gender: Gender.Female },
     { id: 10, chore: "Geen taak", gender: Gender.Other }])
