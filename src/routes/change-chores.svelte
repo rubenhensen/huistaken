@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { chores } from '../stores';
 	import ManWoman from '../lib/ManWoman.svelte';
-
-	export const location = null;
 </script>
 
 <form>

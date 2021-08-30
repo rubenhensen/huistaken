@@ -2,7 +2,6 @@
 	import { chores, names, archiveWeeks } from '../stores';
 	import YesNo from '../lib/YesNo.svelte';
 	import { goto } from '$app/navigation';
-	export const location = null;
 
 	function click(recent) {
 		let newHistory = [];

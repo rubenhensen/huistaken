@@ -1,6 +1,16 @@
 <script lang="ts">
 	import { currentMatching, chores, names } from '../stores';
-	export const location = null;
+	import Fa from 'svelte-fa';
+	import { faCopy } from '@fortawesome/free-solid-svg-icons';
+
+	const copyToClipboard = () => {
+		let text = "";
+		$currentMatching.forEach(match => {
+			let chore = $chores.find((x) => x.id === match.choreId).chore;
+			text = text + chore + "\r\n";
+		});
+		navigator.clipboard.writeText(text).then();
+	}
 </script>
 
 <!-- <a href="/"><Fa icon={faAngleDoubleLeft} /></a> 27 mei <a href="/"><Fa icon={faAngleDoubleRight} /></a> -->
@@ -20,3 +30,11 @@
 		{/each}
 	</tbody>
 </table>
+
+<button on:click={copyToClipboard}>
+	<Fa
+	size="1x"
+	icon={faCopy}
+	primaryColor="green"
+	/>
+</button>

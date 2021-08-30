@@ -9,7 +9,6 @@
 		chores
 	} from '../stores';
 	import YesNo from '../lib/YesNo.svelte';
-	export const location = null;
 	import { matchAndUpdate } from '../matching';
 	import { goto } from '$app/navigation';
 

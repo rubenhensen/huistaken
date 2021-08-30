@@ -41,6 +41,13 @@
 					></a
 				>
 			</li>
+			<li>
+				<a sveltekit:prefetch href="/change-current-chores"
+					><button class:active={$page.path === '/change-current-chores'} class="button button-primary"
+						>Huidige huistaken veranderen</button
+					></a
+				>
+			</li>
 		</ul>
 	</nav>
 </header>

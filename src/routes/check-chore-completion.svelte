@@ -1,6 +1,4 @@
 <script lang="ts">
-	export const location = null;
-
 	import { currentMatching, names, chores } from '../stores';
 	import YesNo from '../lib/YesNo.svelte';
 </script>
@@ -24,4 +22,4 @@
 	</tbody>
 </table>
 
-<a href="/absence"><button class="button button-primary active"> Volgende </button></a>
+<a href="/check-absence"><button class="button button-primary active"> Volgende </button></a>
