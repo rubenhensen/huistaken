@@ -15,7 +15,7 @@
 	$: isDisabled = $activeChores.filter((n) => n.activeChore).length !== $nrPresent;
 
 	function click() {
-		let match = matchAndUpdate(currentMatching, archiveWeeks, chores, names, absence, activeChores);
+		let match = matchAndUpdate(true, currentMatching, archiveWeeks, chores, names, absence, activeChores);
 		currentMatching.set(match);
 		goto('/');
 	}

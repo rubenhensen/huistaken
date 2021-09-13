@@ -10,6 +10,7 @@ import type { ActiveChores } from './types/activeChoresDefinition';
 import { Gender } from './types/personDefinition';
 
 export function matchAndUpdate(
+	addHistory: Boolean,
 	currentMatching: Writable<Matching[]>,
 	archiveWeeks: Writable<Matching[][]>,
 	chores: Writable<Chore[]>,
@@ -29,7 +30,10 @@ export function matchAndUpdate(
 	const activeChoreValue: ActiveChores[] = get(activeChores);
 	const absenceValue: Absence[] = get(absence);
 
-	archiveWeeks.update((arr) => [...arr, currentMatchingValue]);
+	if (addHistory) {
+		archiveWeeks.update((arr) => [...arr, currentMatchingValue]);
+	}
+	
 
 	return match(archiveWeeksValue, choresValue, namesValue, absenceValue, activeChoreValue);
 }

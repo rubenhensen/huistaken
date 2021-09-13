@@ -1,5 +1,32 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+
+	import {
+		absence,
+		names,
+		nrPresent,
+		currentMatching,
+		archiveWeeks,
+		activeChores,
+		chores
+	} from '../stores';
+	import { matchAndUpdate } from '../matching';
+	import { goto } from '$app/navigation';
+
+	function randomizeChoresClick() {
+		console.log("Tried matching");
+		let match = matchAndUpdate(
+			false,
+			currentMatching,
+			archiveWeeks,
+			chores,
+			names,
+			absence,
+			activeChores
+		);
+		currentMatching.set(match);
+		goto('/');
+	}
 </script>
 
 <header>
@@ -35,6 +62,13 @@
 				>
 			</li>
 			<li>
+				<a>
+					<button class="button button-primary" on:click={randomizeChoresClick}
+						>Randomize huistaken</button
+					></a
+				>
+			</li>
+			<li>
 				<a sveltekit:prefetch href="/add-history"
 					><button class:active={$page.path === '/add-history'} class="button button-primary"
 						>Geschiedenis toevoegen</button
@@ -43,8 +77,9 @@
 			</li>
 			<li>
 				<a sveltekit:prefetch href="/change-current-chores"
-					><button class:active={$page.path === '/change-current-chores'} class="button button-primary"
-						>Huidige huistaken veranderen</button
+					><button
+						class:active={$page.path === '/change-current-chores'}
+						class="button button-primary">Huidige huistaken veranderen</button
 					></a
 				>
 			</li>
