@@ -62,7 +62,7 @@
 				>
 			</li>
 			<li>
-				<a>
+				<a sveltekit:prefetch href="/">
 					<button class="button button-primary" on:click={randomizeChoresClick}
 						>Randomize huistaken</button
 					></a
