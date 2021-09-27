@@ -11,8 +11,6 @@
 	import YesNo from '../lib/YesNo.svelte';
 	import { matchAndUpdate } from '../matching';
 	import { goto } from '$app/navigation';
-	
-	import { addHistory } from '../stores';
 
 	function click() {
 		// Check number of absences
@@ -22,7 +20,7 @@
 		} else {
 			$activeChores.forEach((n) => (n.activeChore = true));
 			let match = matchAndUpdate(
-				$addHistory,
+				true,
 				currentMatching,
 				archiveWeeks,
 				chores,
