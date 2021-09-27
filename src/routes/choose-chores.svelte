@@ -5,17 +5,17 @@
 		nrPresent,
 		currentMatching,
 		archiveWeeks,
-		activeChores,
+		// activeChores,
 		chores
 	} from '../stores';
 	import YesNo from '../lib/YesNo.svelte';
 	import { matchAndUpdate } from '../matching';
 	import { goto } from '$app/navigation';
 
-	$: isDisabled = $activeChores.filter((n) => n.activeChore).length !== $nrPresent;
+	// $: isDisabled = $activeChores.filter((n) => n.activeChore).length !== $nrPresent;
 
 	function click() {
-		let match = matchAndUpdate(true, currentMatching, archiveWeeks, chores, names, absence, activeChores);
+		let match = matchAndUpdate(true, currentMatching, archiveWeeks, chores, names, absence);
 		currentMatching.set(match);
 		goto('/');
 	}
@@ -30,18 +30,18 @@
 		</tr>
 	</thead>
 	<tbody>
-		{#each $activeChores as { choreId, activeChore }, i}
+		<!-- {#each $activeChores as { choreId, activeChore }, i}
 			<tr>
 				<td>{$chores.find((x) => x.id === choreId).chore}</td>
 				<td><YesNo bind:completed={activeChore} /></td>
 			</tr>
-		{/each}
+		{/each} -->
 	</tbody>
 </table>
-
+<!-- 
 <button class="button button-primary active" on:click={click} disabled={isDisabled}>
 	Volgende
-</button>
+</button> -->
 
 <style>
 	button:disabled,

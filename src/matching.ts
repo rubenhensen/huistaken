@@ -16,7 +16,6 @@ export function matchAndUpdate(
 	chores: Writable<Chore[]>,
 	names: Writable<Person[]>,
 	absence: Writable<Absence[]>,
-	activeChores: Writable<ActiveChores[]>
 ): Matching[] {
 	// TODO: show error message is tasks and names don't match in size
 	let archiveWeeksValue: Matching[][];
@@ -27,7 +26,6 @@ export function matchAndUpdate(
 	const currentMatchingValue: Matching[] = get(currentMatching);
 	const choresValue: Chore[] = get(chores);
 	const namesValue: Person[] = get(names);
-	const activeChoreValue: ActiveChores[] = get(activeChores);
 	const absenceValue: Absence[] = get(absence);
 
 	if (addHistory) {
@@ -35,7 +33,7 @@ export function matchAndUpdate(
 	}
 
 
-	return match(archiveWeeksValue, choresValue, namesValue, absenceValue, activeChoreValue);
+	return match(archiveWeeksValue, choresValue, namesValue, absenceValue);
 }
 
 export function match(
@@ -43,17 +41,15 @@ export function match(
 	chores: Chore[],
 	names: Person[],
 	absence: Absence[],
-	activeChores: ActiveChores[]
 ): Matching[] {
 	// TODO: show error message is tasks and names don't match in size
 
 	const PREVIOUS_WEEKS_CHECKED = 10;
-	const CHORES_SIZE = 11;
-	const NAMES_SIZE = 10;
+	const CHORES_SIZE = chores.length;
+	const NAMES_SIZE = names.length;
 
-	const MATCH_SIZE = activeChores.filter((n) => n.activeChore).length;
+	const MATCH_SIZE = NAMES_SIZE;
 	const ABSENT_IDS = absence.filter((n) => !n.present).map((n) => n.personId);
-	const INACTIVE_CHORES_IDS = activeChores.filter((n) => !n.activeChore).map((n) => n.choreId);
 
 
 	let lowestIndex: number;
@@ -70,6 +66,7 @@ export function match(
 	let edges = [];
 	let matching = [];
 	let graph = new Array(NAMES_SIZE);
+	let transformation = [];
 	for (let currentArchiveWeek = lowestIndex; currentArchiveWeek < archiveWeeks.length; currentArchiveWeek++) {
 		// Create matching double array full true booleans except no task
 		graph = new Array(NAMES_SIZE);
@@ -77,7 +74,7 @@ export function match(
 		for (let currentArchiveWeek = 0; currentArchiveWeek < NAMES_SIZE; currentArchiveWeek++) {
 			b = new Array(CHORES_SIZE);
 			for (let j = 0; j < CHORES_SIZE; j++) {
-				if (j == 10) {
+				if (chores[j].id == 7) {
 					b[j] = false;
 				} else {
 					b[j] = true;
@@ -133,24 +130,40 @@ export function match(
 			}
 		}
 
-		// Remove inactive chores from being matched
-		INACTIVE_CHORES_IDS.forEach((id) => {
-			for (let i = 0; i < NAMES_SIZE; i++) {
-				graph[i][id] = false;
+		// If not present, make no task their only option
+		for (let i = 0; i < NAMES_SIZE; i++) {
+			if (!absence[i].present) {
+				for (let j = 0; j < CHORES_SIZE; j++) {
+					graph[i][j] = false;
+				}
+				graph[i][7] = true;
 			}
-		});
+		}
 
-		// Remove inactive people from being matched
-		ABSENT_IDS.forEach((id) => {
-			for (let i = 0; i < CHORES_SIZE; i++) {
-				graph[id][i] = false;
+		// Remove inactive chores from being matched
+		// INACTIVE_CHORES_IDS.forEach((id) => {
+		// 	for (let i = 0; i < NAMES_SIZE; i++) {
+		// 		graph[i][id] = false;
+		// 	}
+		// });
+
+		// Add double tasks to the graph
+		transformation = [];
+		for (let j = 0; j < CHORES_SIZE; j++) {
+			for (let k = 1; k < chores[j].amount; k++) {
+				// Add extra column to graph
+				let len = -1;
+				graph.forEach((person: any[]) => {
+					len = person.push(person[j]);
+				});
+				transformation.push([j, len - 1]);
 			}
-		});
+		}
 
 		// Put all edges in an array
 		edges = [];
 		for (let k = 0; k < NAMES_SIZE; k++) {
-			for (let m = 0; m < CHORES_SIZE; m++) {
+			for (let m = 0; m < MATCH_SIZE+1; m++) {
 				if (graph[k][m]) {
 					edges.push([k, m]);
 				}
@@ -158,29 +171,31 @@ export function match(
 		}
 
 		// Try to find matching
-		matching = findMatching(NAMES_SIZE, CHORES_SIZE, edges);
+		matching = findMatching(NAMES_SIZE, MATCH_SIZE+1, edges);
 
 		// If matching found, then stop
 		if (matching.length >= MATCH_SIZE) {
 			break;
 		}
 	}
-	const newMatching = [];
-	console.log(matching);
-	matching.forEach((match) => {
-		newMatching.push({
-			personId: match[0],
-			choreId: match[1],
-			completed: false
-		});
-	});
 
-	for (let i = 0; i < NAMES_SIZE; i++) {
-		if (!newMatching.find((n) => n.personId == i)) {
+	const newMatching = [];
+	// console.log(matching);
+	for (let j = 0; j < matching.length; j++) {
+		let [personIndex, choreIndex] = matching[j];
+
+		if (choreIndex < CHORES_SIZE) {
 			newMatching.push({
-				personId: i,
-				choreId: 10,
-				completed: false
+				personId: personIndex,
+				choreId: choreIndex,
+				completed: true
+			});
+		} else {
+			let [c, d] = transformation.find(([a, b]) => b == choreIndex);
+			newMatching.push({
+				personId: personIndex,
+				choreId: c,
+				completed: true
 			});
 		}
 	}
@@ -188,6 +203,15 @@ export function match(
 	newMatching.sort(function (a, b) {
 		return a.personId - b.personId || a.choreId - b.choreId;
 	});
-
+	console.log(newMatching);
 	return newMatching;
 }
+
+function addColumn(graph: any[], toCopy: number): number {
+	let newIndex = graph[0].length;
+	graph.forEach((person: any[]) => {
+		person.push(person[toCopy]);
+	})
+	return newIndex;
+}
+

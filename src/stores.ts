@@ -21,29 +21,26 @@ export const names = writable<Person[]>('names', [
 ]);
 
 export const chores = writable<Chore[]>('chores', [
-	{ id: 0, chore: 'Keuken (1)', gender: Gender.Other },
-	{ id: 1, chore: 'Keuken (2)', gender: Gender.Other },
-	{ id: 2, chore: 'Woonkamer (1)', gender: Gender.Other },
-	{ id: 3, chore: 'Woonkamer (2)', gender: Gender.Other },
-	{ id: 4, chore: 'Gang', gender: Gender.Other },
-	{ id: 5, chore: 'Apparaten en washok', gender: Gender.Other },
-	{ id: 6, chore: 'Oud papier en glas (1)', gender: Gender.Other },
-	{ id: 7, chore: 'Oud papier en glas (2)', gender: Gender.Other },
-	{ id: 8, chore: 'WC/Douche jongens', gender: Gender.Male },
-	{ id: 9, chore: 'WC/Douche meisjes', gender: Gender.Female },
-	{ id: 10, chore: 'Geen taak', gender: Gender.Other }
+	{ id: 0, chore: 'Keuken', gender: Gender.Other, amount: 2 },
+	{ id: 1, chore: 'Woonkamer', gender: Gender.Other, amount: 2 },
+	{ id: 2, chore: 'Gang', gender: Gender.Other, amount: 1 },
+	{ id: 3, chore: 'Apparaten en washok', gender: Gender.Other, amount: 1 },
+	{ id: 4, chore: 'Oud papier en glas', gender: Gender.Other, amount: 2 },
+	{ id: 5, chore: 'WC/Douche jongens', gender: Gender.Male, amount: 1 },
+	{ id: 6, chore: 'WC/Douche meisjes', gender: Gender.Female, amount: 1 },
+	{ id: 7, chore: 'Geen taak', gender: Gender.Other, amount: 1 }
 ]);
 
 export const currentMatching = writable<Matching[]>('currentMatching', [
-	{ personId: 0, choreId: 8, completed: true },
-	{ personId: 1, choreId: 9, completed: true },
-	{ personId: 2, choreId: 10, completed: true },
-	{ personId: 3, choreId: 4, completed: true },
-	{ personId: 4, choreId: 6, completed: true },
+	{ personId: 0, choreId: 5, completed: true },
+	{ personId: 1, choreId: 1, completed: true },
+	{ personId: 2, choreId: 4, completed: true },
+	{ personId: 3, choreId: 6, completed: true },
+	{ personId: 4, choreId: 4, completed: true },
 	{ personId: 5, choreId: 0, completed: true },
 	{ personId: 6, choreId: 2, completed: true },
 	{ personId: 7, choreId: 1, completed: true },
-	{ personId: 8, choreId: 7, completed: true },
+	{ personId: 8, choreId: 0, completed: true },
 	{ personId: 9, choreId: 3, completed: true }
 ]);
 
@@ -60,21 +57,17 @@ export const absence = writable<Absence[]>('absence', [
 	{ personId: 9, present: true }
 ]);
 
-export const activeChores = writable<ActiveChores[]>('activeChores', [
-	{ choreId: 0, activeChore: true },
-	{ choreId: 1, activeChore: true },
-	{ choreId: 2, activeChore: true },
-	{ choreId: 3, activeChore: true },
-	{ choreId: 4, activeChore: true },
-	{ choreId: 5, activeChore: true },
-	{ choreId: 6, activeChore: true },
-	{ choreId: 7, activeChore: true },
-	{ choreId: 8, activeChore: true },
-	{ choreId: 9, activeChore: true }
-]);
+// export const activeChores = writable<ActiveChores[]>('activeChores', [
+// 	{ choreId: 0, activeChore: true },
+// 	{ choreId: 1, activeChore: true },
+// 	{ choreId: 2, activeChore: true },
+// 	{ choreId: 3, activeChore: true },
+// 	{ choreId: 4, activeChore: true },
+// 	{ choreId: 5, activeChore: true },
+// 	{ choreId: 6, activeChore: true },
+// ]);
 
-export const archiveWeeks = writable<Matching[][]>('archiveWeeks', [[{"personId":0,"choreId":0,"completed":true},{"personId":1,"choreId":6,"completed":true},{"personId":2,"choreId":2,"completed":false},{"personId":3,"choreId":9,"completed":true},{"personId":4,"choreId":4,"completed":true},{"personId":5,"choreId":8,"completed":true},{"personId":6,"choreId":5,"completed":true},{"personId":7,"choreId":1,"completed":true},{"personId":8,"choreId":7,"completed":true},{"personId":9,"choreId":3,"completed":true}],[{"personId":0,"choreId":1,"completed":true},{"personId":1,"choreId":2,"completed":true},{"personId":2,"choreId":10,"completed":true},{"personId":3,"choreId":4,"completed":false},{"personId":4,"choreId":3,"completed":true},{"personId":5,"choreId":6,"completed":true},{"personId":6,"choreId":8,"completed":true},{"personId":7,"choreId":0,"completed":true},{"personId":8,"choreId":5,"completed":true},{"personId":9,"choreId":9,"completed":true}],[{"personId":0,"choreId":8,"completed":true},{"personId":1,"choreId":9,"completed":true},{"personId":2,"choreId":10,"completed":true},{"personId":3,"choreId":4,"completed":true},{"personId":4,"choreId":6,"completed":true},{"personId":5,"choreId":0,"completed":true},{"personId":6,"choreId":2,"completed":true},{"personId":7,"choreId":1,"completed":true},{"personId":8,"choreId":7,"completed":true},{"personId":9,"choreId":3,"completed":true}],[{"personId":0,"choreId":2,"completed":false},{"personId":1,"choreId":0,"completed":false},{"personId":2,"choreId":10,"completed":true},{"personId":3,"choreId":6,"completed":true},{"personId":4,"choreId":8,"completed":true},{"personId":5,"choreId":3,"completed":false},{"personId":6,"choreId":7,"completed":true},{"personId":7,"choreId":5,"completed":true},{"personId":8,"choreId":9,"completed":true},{"personId":9,"choreId":1,"completed":true}],[{"personId":0,"choreId":2,"completed":true},{"personId":1,"choreId":0,"completed":true},{"personId":2,"choreId":8,"completed":true},{"personId":3,"choreId":7,"completed":true},{"personId":4,"choreId":5,"completed":true},{"personId":5,"choreId":3,"completed":true},{"personId":6,"choreId":1,"completed":true},{"personId":7,"choreId":9,"completed":true},{"personId":8,"choreId":4,"completed":true},{"personId":9,"choreId":6,"completed":true}],[{"personId":0,"choreId":4,"completed":true},{"personId":1,"choreId":3,"completed":true},{"personId":2,"choreId":2,"completed":true},{"personId":3,"choreId":9,"completed":true},{"personId":4,"choreId":1,"completed":true},{"personId":5,"choreId":8,"completed":true},{"personId":6,"choreId":6,"completed":true},{"personId":7,"choreId":7,"completed":true},{"personId":8,"choreId":0,"completed":true},{"personId":9,"choreId":5,"completed":true}]]);
-
+export const archiveWeeks = writable<Matching[][]>('archiveWeeks',[]);
 export const nrPresent = svelteWritable<number>(10);
 export const addHistory = svelteWritable<boolean>(true);
 

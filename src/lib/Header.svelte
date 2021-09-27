@@ -7,7 +7,7 @@
 		nrPresent,
 		currentMatching,
 		archiveWeeks,
-		activeChores,
+		// activeChores,
 		chores
 	} from '../stores';
 	import { matchAndUpdate } from '../matching';
@@ -22,11 +22,12 @@
 			chores,
 			names,
 			absence,
-			activeChores
+			// activeChores
 		);
 		currentMatching.set(match);
 		goto('/');
 	}
+	$: isAdmin = $page.path === '/admin'
 </script>
 
 <header>
@@ -39,6 +40,7 @@
 					></a
 				>
 			</li>
+			{#if isAdmin}
 			<li>
 				<a sveltekit:prefetch href="/change-names"
 					><button class:active={$page.path === '/change-names'} class="button button-primary"
@@ -53,6 +55,8 @@
 					></a
 				>
 			</li>
+			{/if}
+
 			<li>
 				<a sveltekit:prefetch href="/check-chore-completion"
 					><button
@@ -61,6 +65,7 @@
 					></a
 				>
 			</li>
+			{#if isAdmin}
 			<li>
 				<a sveltekit:prefetch href="/">
 					<button class="button button-primary" on:click={randomizeChoresClick}
@@ -83,6 +88,7 @@
 					></a
 				>
 			</li>
+			{/if}
 		</ul>
 	</nav>
 </header>
@@ -91,7 +97,16 @@
 	header {
 		display: flex;
 		justify-content: space-between;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		padding: 1rem;
+		width: 100%;
+		max-width: 1024px;
+		margin: 0 auto;
+		box-sizing: border-box;
 	}
+
 
 	nav {
 		display: flex;

@@ -5,7 +5,7 @@
 		nrPresent,
 		currentMatching,
 		archiveWeeks,
-		activeChores,
+		// activeChores,
 		chores
 	} from '../stores';
 	import YesNo from '../lib/YesNo.svelte';
@@ -15,10 +15,10 @@
 	function click() {
 		// Check number of absences
 		$nrPresent = $absence.filter((n) => n.present).length;
-		if ($nrPresent < 10) {
-			goto('/choose-chores');
-		} else {
-			$activeChores.forEach((n) => (n.activeChore = true));
+		// if ($nrPresent < 10) {
+		// 	goto('/choose-chores');
+		// } else {
+			// $activeChores.forEach((n) => (n.activeChore = true));
 			let match = matchAndUpdate(
 				true,
 				currentMatching,
@@ -26,11 +26,11 @@
 				chores,
 				names,
 				absence,
-				activeChores
+				// activeChores
 			);
 			currentMatching.set(match);
 			goto('/');
-		}
+		// }
 	}
 </script>
 

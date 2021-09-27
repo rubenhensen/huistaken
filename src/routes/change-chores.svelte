@@ -11,6 +11,9 @@
 		<div class="two columns" style="padding: 1em">
 			<b>Geslacht</b>
 		</div>
+		<div class="two columns" style="padding: 1em">
+			<b>Hoe veel personen?</b>
+		</div>
 	</div>
 	{#each $chores as { chore, gender }, i}
 		<div class="row">
@@ -26,6 +29,9 @@
 			</div>
 			<div class="two columns" style="padding: 1em">
 				<ManWoman bind:gender />
+			</div>
+			<div class="two columns" style="padding: 1em">
+				<input type="number" id="amount" name="amount" min="1" value="1">
 			</div>
 		</div>
 	{/each}
