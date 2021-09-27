@@ -44,7 +44,7 @@
 </button> -->
 
 <style>
-	button:disabled,
+	/* button:disabled,
 	button[disabled] {
 		border: 1px solid #999999;
 		background-color: #cccccc;
@@ -55,5 +55,5 @@
 		border: 1px solid #999999;
 		background-color: #cccccc;
 		color: #666666;
-	}
+	} */
 </style>
